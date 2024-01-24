@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Cinema Ticket Buying App</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CinemaApp.styles.css" asp-append-version="true" />
+    <style>
+        body {
+            background-image: url('~/images/img.png'); 
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin: 0; 
+            padding: 0; 
+            height: 100vh;
+            overflow: hidden; 
+        }
+
+        .welcome-container {
+            text-align: right;
+            margin-top: 100px;
+            position: absolute; 
+            width: 100%; 
+            padding: 0 20px;
+            box-sizing: border-box; 
+        }
+
+        .welcome-text {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 150px;
+        }
+
+        .learn-link {
+            color: white;
+            text-decoration: underline;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px; 
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container welcome-container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="welcome-text">Welcome to Cinema Ticket Buying App</h1>
+                <p>Explore and enjoy the latest movies in our theaters. Buy your tickets online for a seamless experience.</p>
+                <p>Learn more about our <a class="learn-link" href="https://learn.microsoft.com/aspnet/core">ASP.NET Core</a> web app.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    </footer>
+</body>
+</html>

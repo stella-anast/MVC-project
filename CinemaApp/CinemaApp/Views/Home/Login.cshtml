@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+         body {
+     background-image: url('~/images/img.png'); 
+     background-size: cover;
+     background-position: center;
+     color: white;
+     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+     margin: 0; 
+     padding: 0; 
+     height: 100vh;
+     overflow: hidden; 
+ }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+ </style>
+ </head>
+    <body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Login Form</h2>
+                </div>
+                <div class="card-body">
+                        <form asp-controller="Home" asp-action="Verify" method="post">
+                            <div class="form-group">
+                            <label for="Username"><i class="fa fa-envelope-o" aria-hidden="true"></i> Username</label>
+                            <input type="text" class="form-control" name="Username" placeholder="Enter your username" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="Password"><i class="fa fa-unlock" aria-hidden="true"></i> Password</label>
+                            <input type="password" class="form-control" name="Password" placeholder="Enter your password" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="Role"><i class="fa fa-unlock" aria-hidden="true"></i> Role</label>
+                            <select class="form-control" name="Role" required="">
+                                <option value="admin">admin</option>
+                                <option value="customer">customer</option>
+                                <option value="contentadmin">contentadmin</option>
+                            </select>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <footer>
+        </footer>
+    </body>
+</html>
