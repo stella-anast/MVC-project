@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CinemaApp.Models;
 
-[PrimaryKey("CustomersId", "ProvolesId")]
+[PrimaryKey("CustomersId", "ProvolesMoviesId")]
 [Table("RESERVATIONS")]
 public partial class Reservation
 {
@@ -18,16 +18,16 @@ public partial class Reservation
     public int CustomersId { get; set; }
 
     [Key]
-    [Column("PROVOLES_ID")]
-    [StringLength(45)]
+    [Column("PROVOLES_MOVIES_ID")]
+    [StringLength(50)]
     [Unicode(false)]
-    public string ProvolesId { get; set; } = null!;
+    public string ProvolesMoviesId { get; set; } = null!;
 
     [ForeignKey("CustomersId")]
     [InverseProperty("Reservations")]
     public virtual Customer Customers { get; set; } = null!;
 
-    [ForeignKey("ProvolesId")]
+    [ForeignKey("ProvolesMoviesId")]
     [InverseProperty("Reservations")]
-    public virtual Provole Provoles { get; set; } = null!;
+    public virtual Provole ProvolesMovies { get; set; } = null!;
 }

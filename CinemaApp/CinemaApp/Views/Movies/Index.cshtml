@@ -3,8 +3,25 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    /* AddScreening button styles */
+    .add-screening-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #3498db; /* Set your desired background color */
+        color: #fff; /* Set your desired text color */
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+        float: right;
+    }
 
-<h1>Index</h1>
+        .add-screening-button:hover {
+            background-color: #2980b9; /* Set your desired hover background color */
+        }
+</style>
+
+<h1>Movies</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -68,4 +85,6 @@
         </tr>
 }
     </tbody>
+   
 </table>
+<a asp-action="AddScreening" class="add-screening-button">AddScreening</a>

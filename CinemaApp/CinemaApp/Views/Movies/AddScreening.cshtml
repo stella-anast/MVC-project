@@ -1,0 +1,130 @@
+﻿@model CinemaApp.Models.Provole
+@{
+    ViewBag.Title = "AddScreening";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            background-image: url('~/images/img.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        input[type="datetime-local"],
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #2980b9;
+            }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Add Screening</h2>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="AddScreening" method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+
+                            <!-- Movie Time -->
+                            <div class="form-group">
+                                <label asp-for="MoviesTime"><i class="fa fa-calendar" aria-hidden="true"></i> Movie Time</label>
+                                <input asp-for="MoviesTime" type="datetime-local" class="form-control" required="">
+                                <span asp-validation-for="MoviesTime" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CinemasId">Select Cinema</label>
+                                <select asp-for="CinemasId" class="form-control" asp-items="@(ViewBag.CinemasList)"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MoviesId">Select Movie</label>
+                                <select asp-for="MoviesId" class="form-control" asp-items="@(ViewBag.MoviesList)"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ContentAdminId">Select Content Admin</label>
+                                <select asp-for="ContentAdminId" class="form-control" asp-items="@(ViewBag.ContentAdminsList)"></select>
+                            </div>
+
+                            
+
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary">Add Screening</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    </footer>
+</body>
+</html>

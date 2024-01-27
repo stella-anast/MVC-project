@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CinemaApp.Models;
+using System.Diagnostics;
 
 namespace CinemaApp.Controllers
 {
@@ -17,7 +18,58 @@ namespace CinemaApp.Controllers
         {
             _context = context;
         }
+        [HttpGet]
+        public IActionResult AddScreening()
+        {
+            ViewBag.CinemasList = new SelectList(_context.Cinemas, "Id", "Name");
+            ViewBag.MoviesList = new SelectList(_context.Movies, "Id", "Name");
+            ViewBag.ContentAdminsList = new SelectList(_context.ContentAdmins, "Id", "Name");
+            return View();
+        }
+        //POST:Movies/AddScreening
+        [HttpPost]
+       
+        public async Task<IActionResult> AddScreening([Bind("MoviesTime")]Provole screening)
+        {
+            ModelState.Remove("Cinema");
+            ModelState.Remove("Movie");
+            ModelState.Remove("ContentAdmin");
+            try
+            {
+                
+              
+                if (ModelState.IsValid)
+                {
 
+                    _context.Provoles.Add(screening);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("Index", "Movies");
+                }
+                else
+                {
+                    ViewData["CinemasId"] = new SelectList(_context.Cinemas, "Id", "Name", screening.CinemasId);
+                    ViewData["MoviesId"] = new SelectList(_context.Movies, "Id", "Name", screening.MoviesId);
+                    ViewData["ContentAdminId"] = new SelectList(_context.ContentAdmins, "Id", "Name", screening.ContentAdminId);
+
+                    return View(screening);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                var errorViewModel = new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    // Other properties as needed
+                };
+
+                ViewBag.ErrorMessage = "An error occurred while saving the movie.";
+                return View("Error", errorViewModel);
+            }
+        }
         // GET: Movies
         public async Task<IActionResult> Index()
         {
@@ -43,30 +95,65 @@ namespace CinemaApp.Controllers
 
             return View(movie);
         }
+        [HttpGet]
 
         // GET: Movies/Create
         public IActionResult Create()
         {
-            ViewData["ContentAdminId"] = new SelectList(_context.ContentAdmins, "Id", "Id");
+            ViewBag.ContentAdminId = new SelectList(_context.ContentAdmins, "Id", "Name");
             return View();
         }
-
-        // POST: Movies/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Length,Type,Summary,Director,ReleaseYear,ContentAdminId")] Movie movie)
+        public IActionResult Create([Bind("Name,Length,Type,Summary,Director,ReleaseYear,ContentAdminId")] Movie movie)
         {
+            ModelState.Remove("ContentAdmin");
+            try
+            {
+                
+
+                if (ModelState.IsValid)
+                {
+                 
+                    _context.Movies.Add(movie);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("Index", "Movies");
+                }
+                else
+                {
+                    ViewData["ContentAdminId"] = new SelectList(_context.ContentAdmins, "Id", "Name", movie.ContentAdminId);
+
+                    return View(movie);
+
+                }
+                /*
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["ContentAdminId"] = new SelectList(_context.ContentAdmins, "Id", "Id", movie.ContentAdminId);
-            return View(movie);
+            else
+            {
+                // ModelState is not valid, handle the case
+                //ViewData["ContentAdminId"] = new SelectList(_context.ContentAdmins, "Id", "Name", movieModel.ContentAdminId);
+                return View(movieModel);
+            }
+                */
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                var errorViewModel = new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    // Other properties as needed
+                };
+
+                ViewBag.ErrorMessage = "An error occurred while saving the movie.";
+                return View("Error", errorViewModel);
+            }
         }
+
+
 
         // GET: Movies/Edit/5
         public async Task<IActionResult> Edit(int? id)

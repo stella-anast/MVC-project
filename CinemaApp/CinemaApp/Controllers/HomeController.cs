@@ -41,10 +41,10 @@ namespace CinemaApp.Controllers
                 {
                     return RedirectToAction("Index", "ContentAdmins");
                 }
-                else if (user != null && VerifyPassword(usermodel.Password, user.Salt, user.Password) && user.Role == "contentadmin")
+                else if (user != null && VerifyPassword(usermodel.Password, user.Salt, user.Password) && user.Role == "contentAdmin")
                 {
                     // User exists and is either content admin or customer, redirect to SuccessView
-                    return View("SuccessView");
+                   return RedirectToAction("Index","Movies");
                 }
                 else if (user != null && VerifyPassword(usermodel.Password, user.Salt, user.Password) && user.Role == "customer")
                 {

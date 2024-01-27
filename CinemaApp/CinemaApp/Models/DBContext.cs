@@ -15,6 +15,8 @@ public partial class DBContext : DbContext
     {
     }
 
+
+
     public virtual DbSet<Admin> Admins { get; set; }
 
     public virtual DbSet<Cinema> Cinemas { get; set; }
@@ -33,15 +35,13 @@ public partial class DBContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=LAPTOP-07OD1NDP\\SQLEXPRESS;Database=CinemaApp;Trusted_Connection=True;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-1GOC1TR;Database=CinemaApp;Trusted_Connection=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Admin>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ADMINS__3214EC27B602D848");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasKey(e => e.Id).HasName("PK__ADMINS__3214EC270C94B5CB");
 
             entity.HasOne(d => d.UserUsernameNavigation).WithMany(p => p.Admins)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -50,16 +50,12 @@ public partial class DBContext : DbContext
 
         modelBuilder.Entity<Cinema>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__CINEMAS__3214EC27A7C0230A");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasKey(e => e.Id).HasName("PK__CINEMAS__3214EC27084EA0B1");
         });
 
         modelBuilder.Entity<ContentAdmin>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__CONTENT___3214EC274D3C078C");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasKey(e => e.Id).HasName("PK__CONTENT___3214EC2748F8FDF9");
 
             entity.HasOne(d => d.UserUsernameNavigation).WithMany(p => p.ContentAdmins)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -68,9 +64,7 @@ public partial class DBContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__CUSTOMER__3214EC277D265927");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasKey(e => e.Id).HasName("PK__CUSTOMER__3214EC27A8CA8BE2");
 
             entity.HasOne(d => d.UserUsernameNavigation).WithMany(p => p.Customers)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -79,9 +73,7 @@ public partial class DBContext : DbContext
 
         modelBuilder.Entity<Movie>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__MOVIES__3214EC27ABD0C033");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasKey(e => e.Id).HasName("PK__MOVIES__3214EC275C8030F5");
 
             entity.HasOne(d => d.ContentAdmin).WithMany(p => p.Movies)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -90,7 +82,7 @@ public partial class DBContext : DbContext
 
         modelBuilder.Entity<Provole>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__PROVOLES__3214EC27C2812CBE");
+            entity.HasKey(e => e.Id).HasName("PK__PROVOLES__3214EC27968945E6");
 
             entity.HasOne(d => d.Cinemas).WithMany(p => p.Provoles)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -107,20 +99,20 @@ public partial class DBContext : DbContext
 
         modelBuilder.Entity<Reservation>(entity =>
         {
-            entity.HasKey(e => new { e.CustomersId, e.ProvolesId }).HasName("PK__RESERVAT__8F0BFE19B083C913");
+            entity.HasKey(e => new { e.CustomersId, e.ProvolesMoviesId }).HasName("PK__RESERVAT__8F0BFE192D3A3743");
 
             entity.HasOne(d => d.Customers).WithMany(p => p.Reservations)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_RESERVATIONS_CUSTOMERS1");
 
-            entity.HasOne(d => d.Provoles).WithMany(p => p.Reservations)
+            entity.HasOne(d => d.ProvolesMovies).WithMany(p => p.Reservations)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_RESERVATIONS_PROVOLES1");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Username).HasName("PK__user__F3DBC5734D8FA1AF");
+            entity.HasKey(e => e.Username).HasName("PK__user__F3DBC57389683771");
         });
 
         OnModelCreatingPartial(modelBuilder);

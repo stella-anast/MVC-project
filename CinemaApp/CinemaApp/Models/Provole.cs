@@ -11,7 +11,7 @@ public partial class Provole
 {
     [Key]
     [Column("ID")]
-    [StringLength(45)]
+    [StringLength(50)]
     [Unicode(false)]
     public string Id { get; set; } = null!;
 
@@ -39,6 +39,6 @@ public partial class Provole
     [InverseProperty("Provoles")]
     public virtual Movie Movies { get; set; } = null!;
 
-    [InverseProperty("Provoles")]
+    [InverseProperty("ProvolesMovies")]
     public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 }
