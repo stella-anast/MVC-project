@@ -15,8 +15,6 @@ public partial class DBContext : DbContext
     {
     }
 
-
-
     public virtual DbSet<Admin> Admins { get; set; }
 
     public virtual DbSet<Cinema> Cinemas { get; set; }

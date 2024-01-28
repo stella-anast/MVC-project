@@ -29,10 +29,10 @@ namespace CinemaApp.Controllers
         //POST:Movies/AddScreening
         [HttpPost]
        
-        public async Task<IActionResult> AddScreening([Bind("MoviesTime")]Provole screening)
+        public async Task<IActionResult> AddScreening([Bind("MoviesTime,CinemasId,MoviesId,ContentAdminId")]Provole screening)
         {
-            ModelState.Remove("Cinema");
-            ModelState.Remove("Movie");
+            ModelState.Remove("Cinemas");
+            ModelState.Remove("Movies");
             ModelState.Remove("ContentAdmin");
             try
             {

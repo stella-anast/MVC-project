@@ -11,9 +11,7 @@ public partial class Provole
 {
     [Key]
     [Column("ID")]
-    [StringLength(50)]
-    [Unicode(false)]
-    public string Id { get; set; } = null!;
+    public int Id { get; set; }
 
     [Column("MOVIES_TIME", TypeName = "datetime")]
     public DateTime MoviesTime { get; set; }

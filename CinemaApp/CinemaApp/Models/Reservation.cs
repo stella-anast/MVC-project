@@ -19,9 +19,7 @@ public partial class Reservation
 
     [Key]
     [Column("PROVOLES_MOVIES_ID")]
-    [StringLength(50)]
-    [Unicode(false)]
-    public string ProvolesMoviesId { get; set; } = null!;
+    public int ProvolesMoviesId { get; set; }
 
     [ForeignKey("CustomersId")]
     [InverseProperty("Reservations")]
