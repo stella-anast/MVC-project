@@ -1,0 +1,35 @@
+﻿@model CinemaApp.Models.Provole
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Screening Time</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="MoviesTime"><i class="fa fa-calendar" aria-hidden="true"></i> Movie Time</label>
+                <input asp-for="MoviesTime" type="datetime-local" class="form-control" required="" step="any">
+                <span asp-validation-for="MoviesTime" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+

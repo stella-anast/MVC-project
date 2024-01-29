@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CinemaApp.Models;
 using System.Diagnostics;
 
+
 namespace CinemaApp.Controllers
 {
     public class MoviesController : Controller
@@ -18,58 +19,15 @@ namespace CinemaApp.Controllers
         {
             _context = context;
         }
-        [HttpGet]
-        public IActionResult AddScreening()
+        public IActionResult Add()
         {
-            ViewBag.CinemasList = new SelectList(_context.Cinemas, "Id", "Name");
-            ViewBag.MoviesList = new SelectList(_context.Movies, "Id", "Name");
-            ViewBag.ContentAdminsList = new SelectList(_context.ContentAdmins, "Id", "Name");
-            return View();
+            return RedirectToAction("AddScreening","Provoles");
         }
-        //POST:Movies/AddScreening
-        [HttpPost]
-       
-        public async Task<IActionResult> AddScreening([Bind("MoviesTime,CinemasId,MoviesId,ContentAdminId")]Provole screening)
+        public IActionResult ViewScreenings()
         {
-            ModelState.Remove("Cinemas");
-            ModelState.Remove("Movies");
-            ModelState.Remove("ContentAdmin");
-            try
-            {
-                
-              
-                if (ModelState.IsValid)
-                {
-
-                    _context.Provoles.Add(screening);
-                    _context.SaveChanges();
-
-                    return RedirectToAction("Index", "Movies");
-                }
-                else
-                {
-                    ViewData["CinemasId"] = new SelectList(_context.Cinemas, "Id", "Name", screening.CinemasId);
-                    ViewData["MoviesId"] = new SelectList(_context.Movies, "Id", "Name", screening.MoviesId);
-                    ViewData["ContentAdminId"] = new SelectList(_context.ContentAdmins, "Id", "Name", screening.ContentAdminId);
-
-                    return View(screening);
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                // Log the exception or handle it appropriately
-                var errorViewModel = new ErrorViewModel
-                {
-                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                    // Other properties as needed
-                };
-
-                ViewBag.ErrorMessage = "An error occurred while saving the movie.";
-                return View("Error", errorViewModel);
-            }
+            return RedirectToAction("Index", "Provoles");
         }
+
         // GET: Movies
         public async Task<IActionResult> Index()
         {
@@ -118,7 +76,7 @@ namespace CinemaApp.Controllers
                     _context.Movies.Add(movie);
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index", "Movies");
+                    return View("Index");
                 }
                 else
                 {

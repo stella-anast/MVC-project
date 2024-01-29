@@ -93,9 +93,11 @@
                             <!-- Movie Time -->
                             <div class="form-group">
                                 <label asp-for="MoviesTime"><i class="fa fa-calendar" aria-hidden="true"></i> Movie Time</label>
-                                <input asp-for="MoviesTime" type="datetime-local" class="form-control" required="">
+                                <input asp-for="MoviesTime" type="datetime-local" class="form-control" required="" step="any">
                                 <span asp-validation-for="MoviesTime" class="text-danger"></span>
                             </div>
+
+
 
                             <div class="form-group">
                                 <label asp-for="CinemasId">Select Cinema</label>

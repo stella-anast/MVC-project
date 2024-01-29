@@ -4,38 +4,138 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Import Pure CSS -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+          integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5"
+          crossorigin="anonymous"
+          origin="anonymous" />
 
-<p>
-    <a asp-action="CreateContentAdmin">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserUsernameNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserUsernameNavigation.Username)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <!-- Used to optimize the website for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Add a favicon link if you have one -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <style>
+        body {
+            background-color: #f8f9fa; 
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: red; 
+        }
+
+        .table {
+            background-color: #fff; 
+            margin-top: 20px;
+            border-radius: 8px; 
+            overflow: hidden; 
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            text-align: center;
+            padding: 15px; 
+            font-size: 18px; 
+        }
+
+        th {
+            background-color: #343a40;
+            color: black; 
+        }
+
+        tbody tr:hover {
+            background-color: #f8f9fa; 
+        }
+
+        a {
+            color: #dc3545; 
+            text-decoration: none;
+            font-weight: bold; 
+        }
+
+            a:hover {
+                color: #a52a2a; 
+                text-decoration: none; 
+            }
+
+        .btn-warning {
+            background-color: #ffc107; 
+            color: #212529; 
+        }
+
+            .btn-warning:hover {
+                background-color: #e0a800; 
+                color: #212529; 
+            }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+            .btn-info:hover {
+                background-color: #138496; 
+                color: #fff; 
+            }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Content Admins</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Content Admin Name
+                    </th>
+                    <th>
+                        Username
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserUsernameNavigation.Username)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-danger">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-danger">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <center>
+    <p>
+        <a asp-action="CreateContentAdmin" class="btn btn-info">Create New</a>
+    </p>
+    </center>
+</body>
+
+
+</html>
