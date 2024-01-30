@@ -91,8 +91,11 @@ namespace CinemaApp.Controllers
                             {
                                 int remainingSeats = availableSeats - reservationSeats;
                                 cinema.Seats = remainingSeats.ToString();
-                                _context.SaveChanges();
-                                reservation.NumberOfSeats = reservationSeats;
+                                _context.Cinemas.Attach(cinema);
+                              _context.Customers.Attach(customer);
+                              _context.Entry(cinema).Property(x => x.Seats).IsModified = true;
+                            _context.SaveChanges();
+                            reservation.NumberOfSeats = reservationSeats;
                                 reservation.CustomersId = customer.Id;
                                 reservation.ProvolesMoviesId = screening.Id;
                                 _context.Reservations.Add(reservation);
@@ -126,9 +129,12 @@ namespace CinemaApp.Controllers
                 
                
             }
-            catch (Exception ex) { }
-            ViewBag.ErrorMessage = "An unexpected error occurred. Please try again later.";
-            return View("ErrorView");
+            catch (Exception ex) {
+                Debug.WriteLine(ex.Message);
+                ViewBag.ErrorMessage = "An unexpected error occurred. Please try again later.";
+                return View("ErrorView");
+            }
+            
         }
 
     }
