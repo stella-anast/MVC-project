@@ -49,7 +49,7 @@ namespace CinemaApp.Controllers
                 else if (user != null && VerifyPassword(usermodel.Password, user.Salt, user.Password) && user.Role == "customer")
                 {
                     // User exists and is either content admin or customer, redirect to SuccessView
-                    return View("SuccessView");
+                    return RedirectToAction("showSchedule", "Customers");
                 }
 
             }

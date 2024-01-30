@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CinemaApp.Models;
 using System.Diagnostics;
+using System;
+using System.Linq;
 
 namespace CinemaApp.Controllers
 {
@@ -21,12 +23,10 @@ namespace CinemaApp.Controllers
             var dBContext = _context.Provoles.Include(m => m.ContentAdmin).Include(m => m.Cinemas)
                            .Include(m => m.Movies);
             var provolesList = await dBContext.ToListAsync();
-
-            // Log or print provolesList to check if it's populated correctly
-            Console.WriteLine($"Number of Provoles: {provolesList.Count}");
-
+      
             return View(provolesList);
         }
+       
 
         [HttpGet]
         public IActionResult AddScreening()
@@ -139,6 +139,7 @@ namespace CinemaApp.Controllers
                 return View("Error", errorViewModel);
             }
         }
+      
 
 
 

@@ -6,11 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CinemaApp.Models;
+using CinemaApp.Controllers;
+
+
 
 namespace CinemaApp.Controllers
 {
+    public static class DateTimeExtensions
+    {
+        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
+            return dt.AddDays(-1 * diff).Date;
+        }
+    }
+
     public class CustomersController : Controller
     {
+        
         private readonly DBContext _context;
 
         public CustomersController(DBContext context)
@@ -23,6 +36,10 @@ namespace CinemaApp.Controllers
         {
             var dBContext = _context.Customers.Include(c => c.UserUsernameNavigation);
             return View(await dBContext.ToListAsync());
+        }
+        public IActionResult GetTickets(int screeningId)
+        {
+            return RedirectToAction("showAvailability", "Reservations", new { screeningId });
         }
 
         // GET: Customers/Details/5
@@ -43,6 +60,19 @@ namespace CinemaApp.Controllers
 
             return View(customer);
         }
+        public IActionResult showSchedule()
+        {
+           // DateTime week = DateTime.Now.AddDays(-7);
+            DayOfWeek startOfWeekDay = DayOfWeek.Monday;
+            DateTime weekStart = DateTime.Now.StartOfWeek(startOfWeekDay);
+            var records = _context.Provoles
+                .Include(p => p.Movies)
+                .Include(p => p.Cinemas)
+                .Where(p => p.MoviesTime >= weekStart);
+                
+            return View(records.ToList());
+        }
+       
 
         // GET: Customers/Create
         public IActionResult Create()

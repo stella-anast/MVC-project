@@ -1,0 +1,72 @@
+﻿@model IEnumerable<CinemaApp.Models.Provole>
+
+@{
+    ViewData["Title"] = "showSchedule";
+}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: black;
+    }
+
+    tr {
+        background-color: #f2f2f2;
+    }
+
+    .no-data {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+    }
+ </style>
+
+<h1>Movie Schedule</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.MoviesTime)</th>
+            <th>@Html.DisplayNameFor(model => model.Movies.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Cinemas.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Cinemas._3d)</th>
+            <th>Tickets</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.MoviesTime)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Movies.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cinemas.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cinemas._3d)</td>
+                    <td>
+                        <a asp-controller="Customers" asp-action="GetTickets" asp-route-screeningId="@item.Id">Get Tickets</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="no-data">No data available</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
