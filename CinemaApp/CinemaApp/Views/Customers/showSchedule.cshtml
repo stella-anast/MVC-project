@@ -41,7 +41,7 @@
             <th>@Html.DisplayNameFor(model => model.MoviesTime)</th>
             <th>@Html.DisplayNameFor(model => model.Movies.Name)</th>
             <th>@Html.DisplayNameFor(model => model.Cinemas.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Cinemas._3d)</th>
+            <th>@Html.DisplayNameFor(model => model.Cinemas._3d)</th>          
             <th>Tickets</th>
         </tr>
     </thead>
@@ -69,4 +69,7 @@
         }
     </tbody>
 </table>
+<center>
+    <a asp-controller="Reservations" asp-action="ShowHistory" class="add-screening-button">Show Reservation History</a>
+</center>
 

@@ -25,6 +25,9 @@ public partial class Provole
     [Column("CONTENT_ADMIN_ID")]
     public int ContentAdminId { get; set; }
 
+    [Column("SEATS")]
+    public int Seats { get; set; }
+
     [ForeignKey("CinemasId")]
     [InverseProperty("Provoles")]
     public virtual Cinema Cinemas { get; set; } = null!;

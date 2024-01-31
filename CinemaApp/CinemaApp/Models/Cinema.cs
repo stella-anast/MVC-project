@@ -19,9 +19,7 @@ public partial class Cinema
     public string Name { get; set; } = null!;
 
     [Column("SEATS")]
-    [StringLength(45)]
-    [Unicode(false)]
-    public string Seats { get; set; } = null!;
+    public int Seats { get; set; } 
 
     [Column("3D")]
     [StringLength(45)]
