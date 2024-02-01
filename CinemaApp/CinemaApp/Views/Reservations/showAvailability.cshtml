@@ -15,6 +15,7 @@
         padding: 0;
         height: 100vh;
         overflow: hidden;
+        font-size:20px;
     }
 
     .container {
@@ -84,7 +85,7 @@
 
 
 </style>
-
+<body>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -100,10 +101,10 @@
                         <dd class="col-sm-9">
                             @Html.DisplayFor(model => model.Cinemas.Name)
                         </dd>
-                        <dt class="col-sm-3" style="white-space:nowrap;">
+                        <dt class="col-sm-4" style="white-space:nowrap;">
                             Number of Seats
                         </dt>
-                        <dd class="col-sm-9">
+                        <dd class="col-sm-8">
                             @Html.DisplayFor(model => model.Seats)
                         </dd>
                         <dt class="col-sm-3" style="white-space: nowrap;">
@@ -112,10 +113,10 @@
                         <dd class="col-sm-9">
                             @Html.DisplayFor(model => model.Movies.Name)
                         </dd>
-                        <dt class="col-sm-3" style="white-space: nowrap;">
-                            Movie Datetime
+                            <dt class="col-sm-3" style="white-space: nowrap;">
+                            Movie Date
                         </dt>
-                        <dd class="col-sm-9">
+                        <dd class="col-sm-8">
                             @Html.DisplayFor(model => model.MoviesTime)
                         </dd>
                     </dl>
@@ -125,5 +126,6 @@
     </div>
 </div>
 <center>
-    <a asp-controller="Reservations" asp-action="GetTickets" asp-route-screeningId="@Model.Id" asp-action="GetTickets" class="add-screening-button">Get Tickets</a>
+    <a asp-controller="Reservations" asp-action="GetTickets" asp-route-screeningId="@Model.Id" asp-action="GetTickets" class="add-screening-button" style="font-size:22px;">Get Tickets</a>
 </center>
+</body>

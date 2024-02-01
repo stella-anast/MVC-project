@@ -53,7 +53,11 @@ namespace CinemaApp.Controllers
                 }
 
             }
-            return View("ErrorView");
+           
+                ViewBag.ErrorMessage = "Wrong credentials.Please try again.";
+                return View("ErrorView");
+            
+            
         }
 
         // method to hash password with salt using SHA256
@@ -79,12 +83,17 @@ namespace CinemaApp.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Registration()
+        {
+            return View();
+        }
 
+        [HttpPost]
         //customer registration
         public IActionResult Registration(string username, string password, string email)
         {
-            try
-            {
+            
                 if (ModelState.IsValid)
                 {
 
@@ -116,21 +125,10 @@ namespace CinemaApp.Controllers
                 }
                 else
                 {
-                    return View("Registration");
-                }
-            }
-            catch (Exception ex)
-            {
-                var errorViewModel = new ErrorViewModel
-                {
-                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                    // Other properties as needed
-                };
-
-                ViewBag.ErrorMessage = "An error occurred during registration.";
-                return View("Error", errorViewModel);
-            }
-        }
+                ViewBag.ErrorMessage = "Wrong credentials.Please try again.";
+                return View("ErrorView");
+                } 
+            }     
 
 
         // method to generate a random salt

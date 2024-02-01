@@ -33,14 +33,14 @@
     }
 </style>
 
-<h1>Reservation History</h1>
+<h1 style="color:white">Reservation History</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Customers.Id)</th>
-            <th>@Html.DisplayNameFor(model => model.NumberOfSeats)</th>
-            <th>@Html.DisplayNameFor(model => model.ProvolesMovies.Movies.Name)</th>
+            <th>Customer Name</th>
+            <th>Number Of Seats</th>
+            <th>Movie Name</th>
             
         </tr>
     </thead>
@@ -50,7 +50,7 @@
             foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Customers.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Customers.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.NumberOfSeats)</td>
                     <td>@Html.DisplayFor(modelItem => item.ProvolesMovies.Movies.Name)</td>                                  
                 </tr>

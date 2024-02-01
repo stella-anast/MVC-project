@@ -3,11 +3,19 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
+<head>
+    <style>
+        body{
+            color:white;
+        }
+    </style>
+</head>
+<body>
 <h1>Edit</h1>
 
 <h4>ContentAdmin</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -18,12 +26,12 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+                <div class="form-group" style="margin-bottom: 20px;">
                 <label asp-for="UserUsername" class="control-label"></label>
                 <select asp-for="UserUsername" class="form-control" asp-items="ViewBag.UserUsername"></select>
                 <span asp-validation-for="UserUsername" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 20px;">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -33,6 +41,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+</body>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

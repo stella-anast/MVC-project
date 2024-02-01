@@ -154,13 +154,8 @@ namespace CinemaApp.Controllers
         public IActionResult ShowHistory(string username)
         {
             try {
-                var reservations = _context.Reservations
-               .Include(r => r.ProvolesMovies)
-               .ThenInclude(p => p.Movies)
-               .Where(r => r.Customers.UserUsername == username)
-                .ToList();
-
-                return View("showReservations", reservations);
+               
+                return RedirectToAction("showReservations", new { username = username });
             }
             catch
             {
@@ -172,27 +167,19 @@ namespace CinemaApp.Controllers
         {
             return View();
         }
-        public IActionResult ShowReservations(Customer customer)
+        public IActionResult ShowReservations(string username)
         {
             try
-            {
-                if (customer != null)
-                {
-                    var reservation=_context.Reservations
+            {  
+                    var reservations=_context.Reservations
                                     .Include(r=>r.ProvolesMovies)
                                     .ThenInclude(p=>p.Movies)
-                                    .Include(r => r.CustomersId)
-                                    .Where(r=>r.CustomersId == customer.Id)
+                                    .Include(r => r.Customers)
+                                    .Where(r=>r.Customers.UserUsername== username)
                                     .ToList();
-                    return View(reservation);
+                    return View(reservations);
 
-                }
-                else
-                {
-                    ViewBag.ErrorMessage = "User not found";
-                    return View("ErrorView");
-
-                }
+   
             }
             catch(Exception ex) 
             {

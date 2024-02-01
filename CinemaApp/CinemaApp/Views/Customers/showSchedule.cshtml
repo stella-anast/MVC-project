@@ -11,15 +11,32 @@
         font-family: Arial, sans-serif;
     }
 
+    .add-screening-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size:15px;
+        background-color: #34568b;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+     
+
     th, td {
         padding: 12px;
         border: 1px solid #ddd;
         text-align: left;
+        font-size:20px;
+        text-align: center;
     }
 
     th {
         background-color: #f2f2f2;
         color: black;
+        font-size: 25px;
+        
     }
 
     tr {
@@ -33,15 +50,15 @@
     }
  </style>
 
-<h1>Movie Schedule</h1>
+<h1 style="color:#DFCFBE">Movie Schedule</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.MoviesTime)</th>
-            <th>@Html.DisplayNameFor(model => model.Movies.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Cinemas.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Cinemas._3d)</th>          
+            <th>Movie Time</th>
+            <th>Movie Name</th>
+            <th>Screening Room</th>
+            <th>3D</th>          
             <th>Tickets</th>
         </tr>
     </thead>
@@ -70,6 +87,7 @@
     </tbody>
 </table>
 <center>
-    <a asp-controller="Reservations" asp-action="ShowHistory" class="add-screening-button">Show Reservation History</a>
+    <a asp-controller="Reservations" asp-action="ShowHistory" class="add-screening-button" style="font-size:20px">Show Reservation History</a>
 </center>
+
 
