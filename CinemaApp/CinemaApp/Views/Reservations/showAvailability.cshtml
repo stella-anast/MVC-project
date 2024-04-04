@@ -1,0 +1,131 @@
+﻿@model CinemaApp.Models.Provole
+
+@{
+    ViewData["Title"] = "ShowAvailability";
+}
+
+<style>
+    body {
+        background-image: url('~/images/cinema1.jpg');
+        background-size: cover;
+        background-position: center;
+        color: black;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+        font-size:20px;
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-header {
+        background-color: #3498db;
+        color: white;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    input[type="datetime-local"],
+    input[type="number"],
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        margin-top: 5px;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+    .add-screening-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .add-screening-button:hover {
+        background-color: #2980b9;
+    }
+
+
+</style>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Tickets Availability</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3" style="white-space: nowrap;">
+                            Cinema Name
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Cinemas.Name)
+                        </dd>
+                        <dt class="col-sm-4" style="white-space:nowrap;">
+                            Number of Seats
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Seats)
+                        </dd>
+                        <dt class="col-sm-3" style="white-space: nowrap;">
+                            Movie Name
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Movies.Name)
+                        </dd>
+                            <dt class="col-sm-3" style="white-space: nowrap;">
+                            Movie Date
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.MoviesTime)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<center>
+    <a asp-controller="Reservations" asp-action="GetTickets" asp-route-screeningId="@Model.Id" asp-action="GetTickets" class="add-screening-button" style="font-size:22px;">Get Tickets</a>
+</center>
+</body>

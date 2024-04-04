@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "ErrorView";
+}
+
+<h1>Error</h1>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <p>@ViewBag.ErrorMessage</p>
+}
+else
+{
+    <p>An unknown error occurred.</p>
+}
+
